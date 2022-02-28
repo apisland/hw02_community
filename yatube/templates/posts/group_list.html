@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+<head>
+  <title>
+    {% block title %}{% endblock %}
+  </title>
+</head>
+  <body>
+    <header>
+      <!-- Использованы классы бустрапа для создания типовой навигации с логотипом -->
+      <!-- В дальнейшем тут будет создано полноценное меню -->    
+      <nav class="navbar navbar-light" style="background-color: lightskyblue">
+        <div class="container">
+          <a class="navbar-brand" href="index.html">
+            <img src="img/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
+            <!-- тег span используется для добавления нужных стилей отдельным участкам текста -->
+            <span style="color:red">Ya</span>tube</a>
+          </a>
+        </div>
+      </nav>      
+    </header>
+    <main>{% block content %}
+      <div class="container">
+        <h1>Записи сообщества {{ group.title }}</h1>
+        <p>{{ group.description }}</p>
+        <article>
+          {% for post in posts %}
+          <ul>
+            <li>
+              Автор: {{ post.author.get_full_name }}
+            </li>
+            <li>
+              Дата публикации: {{ post.pub_date|date:"d E Y" }}
+            </li>
+          </ul>
+          <p>{{ post.text }}</p>
+        {% if post.group %}    
+          <a href="{% url 'posts:group_list' post.group.slug %}">все записи группы</a>
+        {% endif %}
+          {% if not forloop.last %}<hr>{% endif %}
+        {% endfor %}
+        </article> 
+        <!-- под последним постом нет линии -->
+      </div>  
+    </main>{% endblock %}
+        {% if post.group %}   
+          <a href="{% url 'posts:group_list' post.group.slug %}">все записи группы</a>
+        {% endif %}
+    <footer class="page-footer font-small blue border-top">
+      <div class="footer-copyright text-center py-3">© 2020 Copyright 
+        <p><span style="color:red">Ya</span>tube</p> 
+      </div>    
+    </footer>
+  </body>
