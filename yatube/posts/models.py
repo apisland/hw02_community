@@ -35,5 +35,3 @@ class Post(models.Model):
     class Meta:
         ordering = ['-pub_date']
         verbose_name_plural = 'Записи блогов'
-
-# Create your models here.

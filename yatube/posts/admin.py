@@ -15,11 +15,9 @@ class PostAdmin(admin.ModelAdmin):
 
 class GroupAdmin(admin.ModelAdmin):
     list_display = ('pk', 'title', 'slug', 'description')
-    search_fields = ['title']
+    search_fields = tuple(('title'))
     empty_value_display = '-пусто-'
 
 
 admin.site.register(Post, PostAdmin)
 admin.site.register(Group, GroupAdmin)
-
-# Register your models here.
